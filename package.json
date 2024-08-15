@@ -15,7 +15,6 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@babel/runtime": "^7.25.0",
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/native": "^6.1.18",
     "expo": "~51.0.28",
@@ -38,6 +37,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@babel/runtime": "^7.25.0",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.2.79",
     "@types/react-test-renderer": "^18.3.0",
