@@ -20,7 +20,7 @@
       },
       "persistent": {
         "title": "持久化语言选择",
-        "description": "使用AsyncStorage持久化存储用户的首选语言，提供应用重启后的一致体验。"
+        "description": "使用expo-secure-store持久化存储用户的首选语言，提供应用重启后的一致体验。"
       },
       "fallback": {
         "title": "语言回退",
@@ -31,5 +31,9 @@
         "description": "用户可以通过点击国家旗帜来切换语言。"
       }
     }
+  },
+  "geo": {
+    "latitude": "纬度",
+    "longitude": "经度"
   }
 }

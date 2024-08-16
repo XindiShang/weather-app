@@ -3,7 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import AsyncStorage from "@react-native-async-storage/async-storage"
 import { changeLanguage, getStoredLanguage } from '../i18n'
 
 const flags = [
@@ -11,14 +10,20 @@ const flags = [
   { lang: "zh-CN", name: "China" },
 ];
 
+const WEATHER_API_KEY='fc7bf996cf728a31ce9b0aee35faaecc';
+
 export default function Index() {
   const { i18n, t } = useTranslation();
   const currentLanguage = i18n.language;
 
   useEffect(() => {
     const loadLanguage = async () => {
-      const savedLanguage = await getStoredLanguage();
-      i18n.changeLanguage(savedLanguage);
+      try {
+        const savedLanguage = await getStoredLanguage();
+        changeLanguage(savedLanguage);
+      } catch (error) {
+        console.error("Failed to load language:", error);
+      }
     };
     loadLanguage();
   }, [i18n]);
@@ -38,7 +43,10 @@ export default function Index() {
       }
       const location = await Location.getCurrentPositionAsync({});
       
-      const { latitude, longitude } = location.coords;    
+      const { latitude, longitude } = location.coords;
+      const message = `${t('geo.latitude')}: ${latitude}, ${t('geo.longitude')}: ${longitude}`;
+
+      alert(message);
     } catch (error) {
     }
   }

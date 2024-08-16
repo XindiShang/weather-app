@@ -1,7 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import * as Localization from "expo-localization";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
+import { Platform } from 'react-native';
 import translationEn from "./locales/en-US/translation.json";
 import translationZh from "./locales/zh-CN/translation.json";
 
@@ -17,7 +18,7 @@ const initI18n = async () => {
     compatibilityJSON: "v3",
     resources,
     lng: language,
-    fallbackLng: "pt-BR",
+    fallbackLng: "zh-CN",
     interpolation: {
       escapeValue: false,
     },
@@ -26,17 +27,26 @@ const initI18n = async () => {
 
 export const getStoredLanguage = async () => {
   try {
-    const savedLanguage = await AsyncStorage.getItem('language');
-    return savedLanguage || Localization.locale;
+    if (Platform.OS === 'web') {
+      const savedLanguage = localStorage.getItem('language');
+      return savedLanguage || Localization.locale;
+    } else {
+      const savedLanguage = await SecureStore.getItemAsync('language');
+      return savedLanguage || Localization.locale;
+    }
   } catch (error) {
-    console.error('Failed to load language from AsyncStorage:', error);
-    return Localization.locale;  // 如果获取失败，返回设备的默认语言
+    console.error('Failed to load language:', error);
+    return Localization.locale;
   }
 };
 
 export const changeLanguage = async (lang: string) => {
   try {
-    await AsyncStorage.setItem('language', lang);
+    if (Platform.OS === 'web') {
+      localStorage.setItem('language', lang);
+    } else {
+      await SecureStore.setItemAsync('language', lang);
+    }
     i18n.changeLanguage(lang);
   } catch (error) {
     console.error('Failed to change language:', error);

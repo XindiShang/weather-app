@@ -20,7 +20,7 @@
       },
       "persistent": {
         "title": "Persistent Language Selection",
-        "description": "Uses AsyncStorage to persistently store the user's preferred language, providing a consistent experience across app restarts."
+        "description": "Uses expo-secure-store to persistently store the user's preferred language, providing a consistent experience across app restarts."
       },
       "fallback": {
         "title": "Language Fallback",
@@ -31,5 +31,9 @@
         "description": "Users can switch languages by tapping on country flags."
       }
     }
+  },
+  "geo": {
+    "latitude": "Latitude",
+    "longitude": "Longitude"
   }
 }
