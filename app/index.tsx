@@ -7,6 +7,7 @@ import { changeLanguage, getStoredLanguage, weatherLanguageCodes } from '../i18n
 import type { WeatherData, Units } from "@/types/weather";
 import WeatherInfo from "@/components/WeatherInfo";
 import UnitsPicker from "@/components/UnitsPicker";
+import ReloadIcon from "@/components/ReloadIcon";
 import { COLORS } from '@/constants/Colors';
 
 const flags = [
@@ -96,6 +97,7 @@ export default function Index() {
       {weather ? (
         <>
           <UnitsPicker units={units} setUnits={setUnits} />
+          <ReloadIcon load={load} />
           <WeatherInfo weather={weather!} />
         </>
       ) : errorMessage ? (
