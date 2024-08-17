@@ -32,8 +32,16 @@
       }
     }
   },
-  "geo": {
+  "weather": {
     "latitude": "纬度",
-    "longitude": "经度"
+    "longitude": "经度",
+    "temperature": "温度",
+    "humidity": "湿度",
+    "windSpeed": "风速",
+    "weatherConditions": "天气状况",
+    "description": "描述",
+    "loading": "正在加载天气数据...",
+    "location": "位置"
+
   }
 }

@@ -11,6 +11,12 @@ const resources = {
   "zh-CN": { translation: translationZh },
 };
 
+export const weatherLanguageCodes = {
+  "en-US": "en",
+  "zh-CN": "zh_cn",
+  "zh-Hans-CN": "zh_cn",
+};
+
 const initI18n = async () => {
   const language = await getStoredLanguage();
 

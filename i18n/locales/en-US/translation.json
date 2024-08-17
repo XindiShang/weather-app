@@ -32,8 +32,15 @@
       }
     }
   },
-  "geo": {
+  "weather": {
     "latitude": "Latitude",
-    "longitude": "Longitude"
+    "longitude": "Longitude",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "windSpeed": "Wind Speed",
+    "weatherConditions": "Weather Conditions",
+    "description": "Description",
+    "loading": "Loading weather data...",
+    "location": "Location"
   }
 }
