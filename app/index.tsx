@@ -12,14 +12,8 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, StyleSheet, Text, useColorScheme } from "react-native";
 import { changeLanguage, getStoredLanguage, weatherLanguageCodes } from '../i18n';
-
-const flags = [
-  { lang: "en-US", name: "USA" },
-  { lang: "zh-CN", name: "China" },
-];
-
-const WEATHER_API_KEY = 'fc7bf996cf728a31ce9b0aee35faaecc';
-const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
+import { WEATHER_API_KEY } from '@env';
+import { BASE_URL } from "@/constants";
 
 export default function Index() {
   const { i18n, t } = useTranslation();
