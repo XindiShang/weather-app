@@ -24,7 +24,17 @@ const ReloadIcon = ({ load }: {
 const styles = StyleSheet.create({
   reloadIcon: {
     position: 'absolute',
-    top: 30,
+    ...Platform.select({
+      ios: {
+        top: 60,
+      },
+      android: {
+        top: 60,
+      },
+      web: {
+        top: 30,
+      },
+    }),
     right: 20,
     zIndex: 10
   },

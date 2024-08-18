@@ -44,7 +44,17 @@ const UnitsPicker = ({ units, setUnits }: {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 30,
+    ...Platform.select({
+      ios: {
+        top: 60,
+      },
+      android: {
+        top: 60,
+      },
+      web: {
+        top: 30,
+      },
+    }),
     left: 20,
     height: 50,
     width: 100,
