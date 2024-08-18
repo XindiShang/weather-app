@@ -1,11 +1,11 @@
 import { Text, View, StyleSheet, Image } from 'react-native';
-import type { WeatherData } from '@/types/weather';
+import type { Units, WeatherData } from '@/types/weather';
 import { COLORS } from '@/constants/Colors';
+import { formatTemperature } from '@/utils';
 
 const { PRIMARY_COLOR, SECONDARY_COLOR } = COLORS;
 
-export default function WeatherInfo({ weather }: { weather: WeatherData }) {
-  console.log(weather);
+export default function WeatherInfo({ weather, units }: { weather: WeatherData, units: Units }) {
   const {
     main: { temp },
     weather: [details],
@@ -18,7 +18,7 @@ export default function WeatherInfo({ weather }: { weather: WeatherData }) {
     <View style={styles.weatherInfo}>
       <Text>{name}</Text>
       <Image source={{ uri: iconUrl }} style={styles.weatherIcon} />
-      <Text style={styles.textPrimary}>{temp}</Text>
+      <Text style={styles.textPrimary}>{formatTemperature(temp, units)}</Text>
       <Text style={styles.weatherDescription}>{description}</Text>
       <Text style={styles.textSecondary}>{main}</Text>
     </View>

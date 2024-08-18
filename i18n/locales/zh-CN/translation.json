@@ -1,5 +1,9 @@
 {
-  "language": "语言",
+  "language": {
+    "title": "语言",
+    "current": "当前语言",
+    "select": "选择语言"
+  },
   "home": {
     "title": "开始",
     "welcome": "欢迎",
@@ -38,10 +42,9 @@
     "temperature": "温度",
     "humidity": "湿度",
     "windSpeed": "风速",
-    "weatherConditions": "天气状况",
-    "description": "描述",
+    "feelsLike": "体感温度",
+    "pressure": "气压",
     "loading": "正在加载天气数据...",
-    "location": "位置"
-
+    "chooseUnits": "选择单位"
   }
 }

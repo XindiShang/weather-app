@@ -1,5 +1,9 @@
 {
-  "language": "Language",
+  "language": {
+    "title": "Language",
+    "current": "Current Language",
+    "select": "Select Language"
+  },
   "home": {
     "title": "Home",
     "welcome": "Welcome",
@@ -38,9 +42,9 @@
     "temperature": "Temperature",
     "humidity": "Humidity",
     "windSpeed": "Wind Speed",
-    "weatherConditions": "Weather Conditions",
-    "description": "Description",
+    "feelsLike": "Feels like",
+    "pressure": "Pressure",
     "loading": "Loading weather data...",
-    "location": "Location"
+    "chooseUnits": "Choose Units"
   }
 }
