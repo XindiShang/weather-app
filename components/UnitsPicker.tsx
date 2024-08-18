@@ -1,17 +1,27 @@
-import React from 'react';
-import { StyleSheet, View, Text, Platform } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 import type { Units } from '@/types/weather';
+import { Picker } from '@react-native-picker/picker';
 import { useTranslation } from 'react-i18next';
+import { Platform, StyleSheet, useColorScheme } from 'react-native';
+import { ThemedText } from './ThemedText';
+import { ThemedView } from './ThemedView';
+import { Colors } from '@/constants/Colors';
+
+const UnitsPickerItems: Record<Units, string> = {
+  metric: 'C°',
+  imperial: 'F°',
+  standard: 'K',
+}
 
 const UnitsPicker = ({ units, setUnits }: {
   units: Units;
   setUnits: (units: Units) => void;
 }) => {
   const { t } = useTranslation();
+  const theme = useColorScheme() ?? 'light';
+
   return (
-    <View style={styles.container}>
-      <Text>{t('weather.chooseUnits')}:</Text>
+    <ThemedView style={styles.container}>
+      <ThemedText>{t('weather.chooseUnits')}:</ThemedText>
       <Picker
         selectedValue={units}
         onValueChange={(itemValue) => {
@@ -21,28 +31,19 @@ const UnitsPicker = ({ units, setUnits }: {
         mode='dropdown'
         itemStyle={{ fontSize: 12 }}
       >
-        <Picker.Item label="C°" value="metric" />
-        <Picker.Item label="F°" value="imperial" />
-        <Picker.Item label="K" value="standard" />
+        {
+          Object.entries(UnitsPickerItems).map(([key, value]) => (
+            <Picker.Item key={key} label={value} value={key} color={Colors[theme].text} />
+          ))
+        }
       </Picker>
-    </View>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    // ...Platform.select({
-    //   ios: {
-    //     top: 30,
-    //   },
-    //   android: {
-    //     top: 30,
-    //   },
-    //   web: {
-    //     top: 30,
-    //   },
-    // }),
     top: 30,
     left: 20,
     height: 50,

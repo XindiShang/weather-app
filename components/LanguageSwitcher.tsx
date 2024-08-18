@@ -1,14 +1,14 @@
+import { Colors } from '@/constants/Colors';
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { COLORS } from '@/constants/Colors';
+import { StyleSheet, TouchableOpacity, useColorScheme } from 'react-native';
+import { ThemedText } from './ThemedText';
+import { ThemedView } from './ThemedView';
 
 const flags = [
   { lang: "en-US", name: "English" },
   { lang: "zh-CN", name: "中文" },
 ];
-
-const { PRIMARY_COLOR, SECONDARY_COLOR } = COLORS;
 
 export default function LanguageSwitcher({ handleChangeLanguage }: {
   handleChangeLanguage: (lang: string) => void;
@@ -16,24 +16,28 @@ export default function LanguageSwitcher({ handleChangeLanguage }: {
 ) {
   const { i18n, t } = useTranslation();
 
+  const theme = useColorScheme() ?? 'light';
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{ t('language.select')}:</Text>
+    <ThemedView style={styles.container}>
+      <ThemedText style={styles.title}>{t('language.select')}:</ThemedText>
       {flags.map(({ lang, name }) => (
         <TouchableOpacity
           key={lang}
           onPress={async () => handleChangeLanguage(lang)}
           style={[
             styles.button,
-            i18n.language === lang && styles.selectedButton
+            { borderColor: Colors[theme].border },
+            i18n.language === lang && theme === 'light' && styles.selectedButtonLight,
+            i18n.language === lang && theme === 'dark' && styles.selectedButtonDark,
           ]}
         >
-          <Text style={{
-            color: i18n.language === lang ? 'white' : PRIMARY_COLOR,
-          }}>{name}</Text>
+          <ThemedText style={{
+            color: i18n.language === lang ? 'white' : Colors[theme].primary,
+          }}>{name}</ThemedText>
         </TouchableOpacity>
       ))}
-    </View>
+    </ThemedView>
   );
 }
 
@@ -51,12 +55,16 @@ const styles = StyleSheet.create({
     padding: 10,
     marginHorizontal: 5,
     borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 5,
   },
-  selectedButton: {
-    backgroundColor: PRIMARY_COLOR,
-    borderColor: PRIMARY_COLOR,
+  selectedButtonLight: {
+    backgroundColor: Colors.light.primary,
+    borderColor: Colors.light.primary,
+    color: 'white',
+  },
+  selectedButtonDark: {
+    backgroundColor: Colors.dark.primary,
+    borderColor: Colors.dark.primary,
     color: 'white',
   },
 });

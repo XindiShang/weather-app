@@ -1,15 +1,16 @@
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ReloadIcon from "@/components/ReloadIcon";
+import { ThemedView } from "@/components/ThemedView";
 import UnitsPicker from "@/components/UnitsPicker";
 import WeatherDetails from "@/components/WeatherDetails";
 import WeatherInfo from "@/components/WeatherInfo";
-import { COLORS } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import type { Units, WeatherData } from "@/types/weather";
 import * as Location from "expo-location";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, useColorScheme } from "react-native";
 import { changeLanguage, getStoredLanguage, weatherLanguageCodes } from '../i18n';
 
 const flags = [
@@ -22,6 +23,7 @@ const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
 export default function Index() {
   const { i18n, t } = useTranslation();
+  const theme = useColorScheme() ?? 'light';
 
   const currentLanguage = i18n.language;
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -79,18 +81,16 @@ export default function Index() {
   }, [i18n.language, units]);
 
   return (
-    <View
-      style={styles.container}
-    >
+    <ThemedView style={styles.container}>
       <StatusBar style="auto" />
 
       {weather ? (
         <>
-          <View style={styles.main}>
+          <ThemedView style={styles.main}>
             <UnitsPicker units={units} setUnits={setUnits} />
             <ReloadIcon load={load} />
             <WeatherInfo weather={weather} units={units} />
-          </View>
+          </ThemedView>
 
           <LanguageSwitcher handleChangeLanguage={changeLanguage} />
 
@@ -102,9 +102,9 @@ export default function Index() {
           <Text>{errorMessage || t('loading')}</Text>
         </>
       ) : (
-        <ActivityIndicator size="large" color={COLORS.PRIMARY_COLOR} />
+        <ActivityIndicator size="large" color={Colors[theme].primary} />
       )}
-    </View>
+    </ThemedView>
   );
 }
 
@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
   },
   main: {
     flex: 1,

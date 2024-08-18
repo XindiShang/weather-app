@@ -1,18 +1,20 @@
-import React from 'react';
-import { StyleSheet, View, Text, Platform } from 'react-native';
+import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS } from '@/constants/Colors';
+import React from 'react';
+import { Platform, StyleSheet, useColorScheme, View } from 'react-native';
 
 const ReloadIcon = ({ load }: {
   load: () => void;
 }) => {
   const reloadIconName = Platform.OS === 'ios' ? 'refresh' : 'refresh-circle-outline';
+  const theme = useColorScheme() ?? 'light';
+
   return (
     <View style={styles.reloadIcon}>
       <Ionicons
         name={reloadIconName}
         size={24}
-        color={COLORS.PRIMARY_COLOR}
+        color={theme === 'light' ? Colors.light.primary : Colors.dark.primary}
         onPress={load}
       />
     </View>
